@@ -66,6 +66,10 @@
     flex-wrap: wrap;
     justify-content: start;
   }
+  .fastfood-container.not-exist {
+    display: flex;
+    flex-direction: column;
+  }
   .card {
     width: 44%;
   }

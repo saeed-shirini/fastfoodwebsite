@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FastFood from "./FastFood";
 import Loading from "../loading/Loading";
+import NotFound from "../notfound/NotFound";
 import { useOutletContext } from "react-router-dom";
 
 function FastFoodList() {
@@ -36,7 +37,6 @@ function FastFoodList() {
     setIsLoading(false);
   };
   useEffect(() => {
-    console.log(fastFoodId);
     if (searchText || !fastFoodId) {
       getFastFoods(
         `https://react-mini-projects-api.classbon.com/FastFood/search?term=${searchText}`
@@ -63,16 +63,20 @@ function FastFoodList() {
   }, [fastFoodId]);
 
   return (
-    <div className="fastfood-container">
-      {isLoading ? (
+    <div
+      className={`fastfood-container ${
+        fastFoods.length === 0 || isLoading ? "not-exist" : ""
+      }`}
+    >
+      {isLoading && (
         <div className="loading-container" style={{ margin: "10px auto" }}>
           <Loading />
         </div>
-      ) : (
-        fastFoods.map((fastFood) => {
-          return <FastFood key={fastFood.id} {...fastFood} />;
-        })
       )}
+      {fastFoods.length === 0 && <NotFound />}
+      {fastFoods.map((fastFood) => {
+        return <FastFood key={fastFood.id} {...fastFood} />;
+      })}
     </div>
   );
 }
