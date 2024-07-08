@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./navbar.css";
 import { useState, useEffect } from "react";
-import Category from "../Category";
+import Category from "./Category";
 import Loading from "../loading/Loading";
+import Search from "./Search";
+const getParams = Number(window.location.pathname.split("/")[2]);
 
-function Navbar() {
+function Navbar({ searchText, setSearchText }) {
   const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState(0);
+  const [categoryId, setCategoryId] = useState(getParams || 0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -47,6 +49,7 @@ function Navbar() {
             );
           })}
         </ul>
+        <Search searchText={searchText} setSearchText={setSearchText} />
       </nav>
     </div>
   );

@@ -1,0 +1,26 @@
+.search {
+  width: 100%;
+  text-align: center;
+}
+.search form {
+  padding: 10px 15px;
+}
+.search form input {
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #005a34;
+  width: 100%;
+  background-color: transparent;
+  padding: 10px 0;
+  font-size: 17px;
+  transition: 0.2s;
+}
+.search form input:hover {
+  background-color: #ababab;
+}
+
+@media screen and (min-width: 1050px) {
+  .search {
+    width: 300px;
+  }
+}

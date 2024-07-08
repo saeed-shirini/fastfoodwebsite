@@ -6,6 +6,11 @@
   background-color: #e2e2e2;
   border-radius: 5px;
   padding: 1px 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .navbar-items {
   display: flex;
@@ -45,6 +50,11 @@
 @media screen and (min-width: 1050px) {
   .navbar-container {
     max-width: 1000px;
+  }
+  .navbar {
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
   }
 }
 
