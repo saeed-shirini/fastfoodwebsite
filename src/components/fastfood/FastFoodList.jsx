@@ -7,11 +7,13 @@ import Loading from "../loading/Loading";
 import NotFound from "../notfound/NotFound";
 import { useOutletContext } from "react-router-dom";
 
+//const initial = { fastFoods: [], isLoading: false };
 function FastFoodList() {
+  const { fastFoodId } = useParams();
+  // const [state, dispatch] = useReducer(fastFoodReducer, initial);
   const [searchText, setSearchText] = useOutletContext();
   const [fastFoods, setFastFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { fastFoodId } = useParams();
 
   /* const getAllFastFoods = async () => {
     const response = await axios.get(
@@ -29,13 +31,17 @@ function FastFoodList() {
     sertFastFoods(fastFoodCategory);
   };*/
 
-  const getFastFoods = async (url) => {
+  async function getFastFoods(url) {
     setIsLoading(true);
     const response = await axios.get(url);
     const data = response.data;
     setFastFoods(data);
     setIsLoading(false);
-  };
+    /*dispatch("GET_FAST_FODS", {
+      fastFoods: data,
+      isLoading: true,
+    });*/
+  }
   useEffect(() => {
     if (searchText || !fastFoodId) {
       getFastFoods(
@@ -73,10 +79,13 @@ function FastFoodList() {
           <Loading />
         </div>
       )}
-      {fastFoods.length === 0 && <NotFound />}
-      {fastFoods.map((fastFood) => {
-        return <FastFood key={fastFood.id} {...fastFood} />;
-      })}
+      {fastFoods.length === 0 && !isLoading ? (
+        <NotFound />
+      ) : (
+        fastFoods.map((fastFood) => {
+          return <FastFood key={fastFood.id} {...fastFood} />;
+        })
+      )}
     </div>
   );
 }

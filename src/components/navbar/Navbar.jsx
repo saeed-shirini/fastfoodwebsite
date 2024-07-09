@@ -7,7 +7,7 @@ import Loading from "../loading/Loading";
 import Search from "./Search";
 const getParams = Number(window.location.pathname.split("/")[2]);
 
-function Navbar({ searchText, setSearchText }) {
+function Navbar() {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState(getParams || 0);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +49,7 @@ function Navbar({ searchText, setSearchText }) {
             );
           })}
         </ul>
-        <Search searchText={searchText} setSearchText={setSearchText} />
+        <Search />
       </nav>
     </div>
   );

@@ -1,6 +1,9 @@
 import "./search.css";
+import { useContext } from "react";
+import SearchTextContext from "../../context/searchprovider";
 
-function Search({ searchText, setSearchText }) {
+function Search() {
+  const { searchText, setSearchText } = useContext(SearchTextContext);
   return (
     <div className="search">
       <form onSubmit={(e) => e.preventDefault()}>
